@@ -10,6 +10,7 @@ from sqlalchemy import String
 
 Base = declarative_base()
 
+
 class BaseModel:
     """Defines the BaseModel class.
     Attributes:

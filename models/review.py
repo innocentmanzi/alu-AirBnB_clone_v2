@@ -7,6 +7,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy import String
 from sqlalchemy.orm import relationship
 
+
 class Review(BaseModel, Base):
     """Represents a review for a MySQL database.
     Inherits from SQLAlchemy Base and links to the MySQL table reviews.
