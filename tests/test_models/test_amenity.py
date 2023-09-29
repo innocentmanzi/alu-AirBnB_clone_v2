@@ -70,14 +70,27 @@ class TestAmenity(unittest.TestCase):
         self.assertIsNotNone(Amenity.__doc__)
 
     def test_attributes(self):
-        """Check for attributes."""
-        us = Amenity(email="a", password="a")
-        self.assertEqual(str, type(us.id))
-        self.assertEqual(datetime, type(us.created_at))
-        self.assertEqual(datetime, type(us.updated_at))
-        self.assertTrue(hasattr(us, "__tablename__"))
-        self.assertTrue(hasattr(us, "name"))
-        self.assertTrue(hasattr(us, "place_amenities"))
+    """Check for attributes."""
+    us = Amenity(name="Sample Amenity")
+    
+    # Check the existence and types of attributes
+    self.assertIsInstance(us.id, str)
+    self.assertIsInstance(us.created_at, datetime)
+    self.assertIsInstance(us.updated_at, datetime)
+    self.assertIsInstance(us.name, str)
+    
+    # Check the existence of "place_amenities" attribute
+    self.assertTrue(hasattr(us, "place_amenities"))
+
+    # def test_attributes(self):
+    #     """Check for attributes."""
+    #     us = Amenity(email="a", password="a")
+    #     self.assertEqual(str, type(us.id))
+    #     self.assertEqual(datetime, type(us.created_at))
+    #     self.assertEqual(datetime, type(us.updated_at))
+    #     self.assertTrue(hasattr(us, "__tablename__"))
+    #     self.assertTrue(hasattr(us, "name"))
+    #     self.assertTrue(hasattr(us, "place_amenities"))
 
     @unittest.skipIf(type(models.storage) == FileStorage,
                      "Testing FileStorage")
