@@ -9,7 +9,6 @@ from sqlalchemy import Column
 from sqlalchemy import String
 from sqlalchemy.orm import relationship
 
-
 class State(BaseModel, Base):
     """Represents a state for a MySQL database.
     Inherits from SQLAlchemy Base and links to the MySQL table states.

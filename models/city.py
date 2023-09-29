@@ -7,7 +7,6 @@ from sqlalchemy import ForeignKey
 from sqlalchemy import String
 from sqlalchemy.orm import relationship
 
-
 class City(BaseModel, Base):
     """Represents a city for a MySQL database.
     Inherits from SQLAlchemy Base and links to the MySQL table cities.
