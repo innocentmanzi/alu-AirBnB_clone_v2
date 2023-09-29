@@ -13,7 +13,6 @@ from sqlalchemy import Integer
 from sqlalchemy import String
 from sqlalchemy import Table
 from sqlalchemy.orm import relationship
-from models import storage
 
 
 association_table = Table("place_amenity", Base.metadata,
