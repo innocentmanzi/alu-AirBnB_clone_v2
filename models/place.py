@@ -59,28 +59,6 @@ class Place(BaseModel, Base):
     amenities = relationship("Amenity", secondary="place_amenity", viewonly=False)
     amenity_ids = []
 
-    # Define the Many-To-Many relationship with Amenity
-    if getenv("HBNB_TYPE_STORAGE") == "db":
-        metadata = Base.metadata
-
-        place_amenity = Table(
-            "place_amenity",
-            metadata,
-            Column("place_id", String(60),
-                   ForeignKey('places.id'),
-                   primary_key=True,
-                   nullable=False),
-            Column("amenity_id", String(60),
-                   ForeignKey('amenities.id'),
-                   primary_key=True,
-                   nullable=False)
-        )
-
-        amenities = relationship("Amenity",
-                                secondary=place_amenity,
-                                viewonly=False,
-                                back_populates="place_amenities")
-
     if getenv("HBNB_TYPE_STORAGE", None) != "db":
         @property
         def reviews(self):
