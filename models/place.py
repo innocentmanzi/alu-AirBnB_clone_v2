@@ -13,6 +13,7 @@ from sqlalchemy import Integer
 from sqlalchemy import String
 from sqlalchemy import Table
 from sqlalchemy.orm import relationship
+from models import storage
 
 
 association_table = Table("place_amenity", Base.metadata,
@@ -57,6 +58,28 @@ class Place(BaseModel, Base):
     reviews = relationship("Review", backref="place", cascade="delete")
     amenities = relationship("Amenity", secondary="place_amenity", viewonly=False)
     amenity_ids = []
+
+    # Define the Many-To-Many relationship with Amenity
+    if getenv("HBNB_TYPE_STORAGE") == "db":
+        metadata = Base.metadata
+
+        place_amenity = Table(
+            "place_amenity",
+            metadata,
+            Column("place_id", String(60),
+                   ForeignKey('places.id'),
+                   primary_key=True,
+                   nullable=False),
+            Column("amenity_id", String(60),
+                   ForeignKey('amenities.id'),
+                   primary_key=True,
+                   nullable=False)
+        )
+
+        amenities = relationship("Amenity",
+                                secondary=place_amenity,
+                                viewonly=False,
+                                back_populates="place_amenities")
 
     if getenv("HBNB_TYPE_STORAGE", None) != "db":
         @property
