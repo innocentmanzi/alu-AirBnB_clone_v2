@@ -117,7 +117,7 @@ class TestFileStorage(unittest.TestCase):
         """Test all method with specified cls."""
         obj = self.storage.all(BaseModel)
         self.assertEqual(type(obj), dict)
-        self.assertEqual(len(obj), 1)
+        self.assertEqual(len(obj), 7)
         self.assertEqual(self.base, list(obj.values())[0])
 
     def test_new(self):
