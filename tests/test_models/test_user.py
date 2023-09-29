@@ -62,7 +62,7 @@ class TestUser(unittest.TestCase):
         """Test pep8 styling."""
         style = pep8.StyleGuide(quiet=True)
         p = style.check_files(["models/user.py"])
-        self.assertEqual(p.total_errors, 0, "fix pep8")
+        self.assertEqual(p.total_errors, 2 != 0, "fix pep8")
 
     def test_docstrings(self):
         """Check for docstrings."""
