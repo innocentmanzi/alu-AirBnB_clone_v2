@@ -1,11 +1,15 @@
 #!/usr/bin/python3
 """Defines unnittests for models/base_model.py."""
 import os
+from os import getenv
 import pep8
 import unittest
 from datetime import datetime
+from models import storage
 from models.base_model import BaseModel
+from models.state import State
 from models.engine.file_storage import FileStorage
+import MySQLdb
 
 
 class TestBaseModel(unittest.TestCase):
@@ -25,6 +29,14 @@ class TestBaseModel(unittest.TestCase):
         FileStorage._FileStorage__objects = {}
         cls.storage = FileStorage()
         cls.base = BaseModel()
+        cls.base.name = "Kev"
+        cls.base.num = 20
+        if getenv("HBNB_TYPE_STORAGE") == "db":
+            cls.db = MySQLdb.connect(getenv("HBNB_MYSQL_HOST"),
+                                     getenv("HBNB_MYSQL_USER"),
+                                     getenv("HBNB_MYSQL_PWD"),
+                                     getenv("HBNB_MYSQL_DB"))
+            cls.cursor = cls.db.cursor()
 
     @classmethod
     def tearDownClass(cls):
@@ -42,6 +54,8 @@ class TestBaseModel(unittest.TestCase):
             pass
         del cls.storage
         del cls.base
+        if getenv("HBNB_TYPE_STORAGE") == "db":
+            self.db.close()
 
     def test_pep8(self):
         """Test pep8 styling."""
