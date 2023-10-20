@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-
-"""Script that starts a Flask web apllication"""
+"""List Cities by States"""
 
 from flask import Flask, render_template
 from models import storage
@@ -15,8 +14,6 @@ def cities_by_states():
 
     return render_template('8-cities_by_states.html',
                            states=storage.all('State').values())
-
-
 @app.teardown_appcontext
 def teardown(self):
     """closes the current SQLAlchemy Session"""
